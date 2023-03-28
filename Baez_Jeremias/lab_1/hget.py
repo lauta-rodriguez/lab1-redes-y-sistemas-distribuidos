@@ -91,17 +91,22 @@ def connect_to_server(server_name):
     # COMPLETAR ABAJO DE ESTA LINEA
     # Aqui deberian obtener la direccion ip del servidor y asignarla
     error = False
-
-    
-    ip_address = socket.gethostbyname(server_name)
+    try:
+        ip_address = socket.gethostbyname(server_name)   
+    except:  
+        raise socket.gaierror("[Errno -5] No address associated with hostname")
     # a ip_address
     # DEJAR LA LINEA SIGUIENTE TAL COMO ESTA
     sys.stderr.write("Contactando al servidor en %s...\n" % ip_address)
     # Crear socket
     # COMPLETAR ABAJO DE ESTA LINEA
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((ip_address, HTTP_PORT))
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((ip_address, HTTP_PORT))
+    except:
+        raise ConnectionRefusedError("[Errno 111] Connection refused")
     return s
+    
 
     # Aqui deben conectarse al puerto correcto del servidor
     # NO MODIFICAR POR FUERA DE ESTA FUNCION
