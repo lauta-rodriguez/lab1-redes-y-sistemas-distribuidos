@@ -107,7 +107,7 @@ def connect_to_server(server_name):
         s.connect((ip_address, HTTP_PORT))
         return s
     except ConnectionRefusedError as e:
-        print(f'{e}: [Errno 111] Connection refused -> kionda')
+        print(f'{e}: [Errno 111] Connection refused')
 
     # NO MODIFICAR POR FUERA DE ESTA FUNCION
 
